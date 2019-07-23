@@ -60,6 +60,12 @@ func (srp *SRP) GetVerifier() string {
   return fmt.Sprintf("%X", srp.v)
 }
 
+func (srp *SRP) Hash(p string) string {
+  sha := sha1.New()
+  sha.Write([]byte(p))
+  return fmt.Sprintf("%X", sha.Sum(nil))
+}
+
 func New() SRP {
   var srp SRP
 
