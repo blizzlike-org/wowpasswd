@@ -5,7 +5,7 @@ It can be integrated into go-based content management systems.
 
 ## example client
 
-the example client creates `s` and `v` values that can be insert into account table of the
+the example client creates `s` and `v` values that can be inserted into account table of the
 realmd database.
 
     > ./wowpasswd johndoe

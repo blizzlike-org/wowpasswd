@@ -6,9 +6,25 @@ import (
   "math/big"
 
   "fmt"
+  "strings"
 )
 
 var s_BYTE_SIZE = 32
+
+func reverse(s []byte) []byte {
+  runes := s
+  for i, j := 0, len(runes) - 1; i < j; i, j = i + 1, j - 1 {
+    runes[i], runes[j] = runes[j], runes[i]
+  }
+  return runes
+}
+
+func Hash(u, p string) string {
+  rI := fmt.Sprintf("%s:%s", strings.ToUpper(u) ,strings.ToUpper(p))
+  sha := sha1.New()
+  sha.Write([]byte(rI))
+  return fmt.Sprintf("%X", sha.Sum(nil))
+}
 
 type SRP struct {
   // large safe prime number
@@ -19,14 +35,6 @@ type SRP struct {
   s *big.Int
   // password verifier
   v *big.Int
-}
-
-func reverse(s []byte) []byte {
-  runes := s
-  for i, j := 0, len(runes) - 1; i < j; i, j = i + 1, j - 1 {
-    runes[i], runes[j] = runes[j], runes[i]
-  }
-  return runes
 }
 
 func (srp *SRP) ComputeVerifier(rI string) {
@@ -58,12 +66,6 @@ func (srp *SRP) GetSalt() string {
 
 func (srp *SRP) GetVerifier() string {
   return fmt.Sprintf("%X", srp.v)
-}
-
-func (srp *SRP) Hash(p string) string {
-  sha := sha1.New()
-  sha.Write([]byte(p))
-  return fmt.Sprintf("%X", sha.Sum(nil))
 }
 
 func New() SRP {
