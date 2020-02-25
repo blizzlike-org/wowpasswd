@@ -8,7 +8,7 @@ import (
 
   "golang.org/x/crypto/ssh/terminal"
 
-  "metagit.org/blizzlike/wowpasswd/srp"
+  "github.com/blizzlike-org/wowpasswd/srp"
 )
 
 func main() {
